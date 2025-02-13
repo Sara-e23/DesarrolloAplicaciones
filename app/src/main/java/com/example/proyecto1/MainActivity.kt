@@ -5,16 +5,19 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ComposableTarget
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -32,24 +35,26 @@ class MainActivity : ComponentActivity() {
         //enableEdgeToEdge()
         setContent {
             Proyecto1Theme {
-                Column(){//utilizaremos Row, Column y Box
+                /*Column(){//utilizaremos Row, Column y Box
                     Column(){
                         TextComposable()
                         TextComposable()
                         TextComposable()
                     }
-                }
-                Row(){
-                    TextComposable()
-                    TextComposable()
-                    TextComposable()
+                    Row(){
+                        TextComposable()
+                        TextComposable()
+                        TextComposable()
 
-                }
-                Column(){
-                    ModifierExample2()
+                    }
+                    Column(){
+                        ModifierExample2()
 
-                    CustomText()
-                }
+                        CustomText()
+                    }
+                }*/
+
+
             }
         }
     }
@@ -71,8 +76,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-
-
 @Preview(showBackground = true)
 @Composable
 fun ModifierExample2(){
@@ -86,6 +89,21 @@ fun ModifierExample2(){
         Text("1", Modifier.align(Alignment.TopStart))
         Text("2", Modifier.align(Alignment.TopCenter))
         Text("3", Modifier.align(Alignment.TopCenter))
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun ModifierExample2(){
+        Column(modifier = Modifier
+            .padding(20.dp)
+            .fillMaxWidth()
+            .clickable ( onClick = { clickAction() } )
+        ){
+            Text("Hello World")
+        }
+    }
+    fun clickAction(){
+        println("Column Clicked")
     }
 
 @Preview(showBackground = true)
@@ -121,6 +139,23 @@ fun ModifierExample(){
                 style = TextStyle(brush = Brush.linearGradient(colors = gradientColors))
             )
         }
-
     }
-}
+    @Preview(showBackground = true)
+    @Composable
+    fun picture(){
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Black)
+                .height(300.dp)
+        ){
+            Image(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                painter = painterResouce(R.drawble.SatoSugu)
+                contentDescription = "Imagen de SS"
+            )
+        }
+    }
+
+} //Main class
