@@ -14,23 +14,21 @@ import androidx.navigation.NavHostController
 fun MainMenuScreens(navController: NavHostController) {
     Column(
         modifier = Modifier
-            .padding(10.dp)  // Aplica un margen de 10dp alrededor de la columna
-            .fillMaxSize()  // Hace que la columna ocupe toda la pantalla
+            .padding(10.dp)
+            .fillMaxSize()
     ) {
-        // Sección para la pantalla "Home Screens"
-        Text("Home Screens")  // Texto descriptivo
+        Text("Home Screens")
         Button(
-            onClick = { navController.navigate("Home_Screens") }  // Navega a la pantalla HomeScreens
+            onClick = { navController.navigate("Home_Screens") }
         ) {
-            Text("Go to Home Screens")  // Texto del botón
+            Text("Go to Home Screens")
         }
 
-        // Sección para la pantalla "Test Screen"
-        Text("Test Screen")  // Texto descriptivo
+        Text("Text Screen")
         Button(
-            onClick = { navController.navigate("Test_Screen") }  // Navega a la pantalla TestScreen
+            onClick = { navController.navigate("Text_Screen") }
         ) {
-            Text("Go to Test Screen")  // Texto del botón
+            Text("Go to Text Screen")
         }
     }
 }

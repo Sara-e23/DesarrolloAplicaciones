@@ -44,24 +44,20 @@ fun TestScreen(navController: NavHostController) {
             .padding(2.dp)
             .fillMaxSize()
     ) {
-        // Texto que indica la pantalla actual
-        Text("Test Screen")
+        Text("Text Screen")
 
-        // Botón para volver al menú principal
         Button(
             onClick = { navController.navigate("Main_Menu") }
         ) {
             Text("Return to Main Menu")
         }
 
-        // Otro botón que navega a la misma pantalla (parece redundante)
         Button(
-            onClick = { navController.navigate("TestScreen") }
+            onClick = { navController.navigate("TextScreen") }
         ) {
-            Text("Go to Test Screen")
+            Text("Go to Text Screen")
         }
 
-        // Diferentes estructuras de disposición con texto reutilizable
         Column {
             Column {
                 TextComposable()
@@ -86,7 +82,6 @@ fun TestScreen(navController: NavHostController) {
     }
 }
 
-// Función composable de texto reutilizable con un valor predeterminado
 @Preview(showBackground = true)
 @Composable
 fun TextComposable(name: String = "Empty") {
@@ -94,7 +89,6 @@ fun TextComposable(name: String = "Empty") {
     Text(name)
 }
 
-// Ejemplo de uso de modificadores con padding
 @Preview(showBackground = true)
 @Composable
 fun ModifierExample1() {
@@ -106,7 +100,6 @@ fun ModifierExample1() {
     }
 }
 
-// Ejemplo de modificador que responde a clics
 @Preview(showBackground = true)
 @Composable
 fun ModifierExample2() {
@@ -120,12 +113,10 @@ fun ModifierExample2() {
     }
 }
 
-// Acción que se ejecuta al hacer clic
 fun clickAction() {
     println("Column Clicked")
 }
 
-// Ejemplo de modificador con altura, fondo y borde
 @Preview(showBackground = true)
 @Composable
 fun ModifierExample3() {
@@ -148,7 +139,6 @@ fun ModifierExample3() {
     }
 }
 
-// Ejemplo de alineación de texto dentro de un Box
 @Preview(showBackground = true)
 @Composable
 fun ModifierExample4() {
@@ -171,7 +161,6 @@ fun ModifierExample4() {
     }
 }
 
-// Ejemplo de texto con color y gradientes
 @Preview(showBackground = true)
 @Composable
 fun CustomText() {
@@ -184,7 +173,6 @@ fun CustomText() {
             fontWeight = FontWeight.ExtraBold
         )
 
-        // Aplicación de un gradiente de colores al texto
         val gradientColors = listOf(Color.Blue, Color.Green, Color.Cyan, colorResource(R.color.purple_200))
         Text(
             stringResource(R.string.Example_text),
@@ -193,7 +181,6 @@ fun CustomText() {
     }
 }
 
-// Composable que muestra una imagen con fondo gris
 @Preview(showBackground = true)
 @Composable
 fun Picture() {
@@ -205,8 +192,8 @@ fun Picture() {
     ) {
         Image(
             modifier = Modifier.fillMaxWidth(),
-            painter = painterResource(R.drawable.satosugu), // Carga la imagen desde los recursos drawables
-            contentDescription = "Imagen Geto"
+            painter = painterResource(R.drawable.satosugu),
+            contentDescription = "Imagen satosugu"
         )
     }
 }

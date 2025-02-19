@@ -34,17 +34,14 @@ import com.example.proyecto1.R
 
 @Composable
 fun HomeScreens(navController: NavHostController) {
-    // Llamada a la barra superior (top bar)
     topbar()
 
-    // Columna principal con desplazamiento vertical
     Column(
         modifier = Modifier
-            .padding(0.dp, 60.dp, 0.dp, 0.dp)  // Aplica un padding en la parte superior de 60dp
-            .fillMaxSize()  // Hace que la columna ocupe toda la pantalla
-            .verticalScroll(rememberScrollState())  // Habilita el desplazamiento vertical para el contenido
+            .padding(0.dp, 60.dp, 0.dp, 0.dp)
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
-        // Llamadas a los composables Content1 y Content2 repetidos
         Content1()
         Content2()
         Content1()
@@ -52,136 +49,121 @@ fun HomeScreens(navController: NavHostController) {
         Content1()
         Content2()
 
-        // Texto que indica que estamos en la pantalla principal
         Text("Home Screen")
 
-        // Botón para volver al menú principal
         Button(
             onClick = { navController.navigate("Main_Menu") }
         ) {
             Text("Return to Main Menu")
         }
 
-        // Botón para ir a la pantalla de prueba
         Button(
-            onClick = { navController.navigate("Test_Screen") }
+            onClick = { navController.navigate("Text_Screen") }
         ) {
-            Text("Go to Test Screen")
+            Text("Go to Text Screen")
         }
     }
 }
 
-// Función composable para el contenido de la tarjeta 1 (Content1)
 @Preview(showBackground = true)
 @Composable
 fun Content1() {
     Card(
         modifier = Modifier
-            .background(Color.Blue)  // Fondo azul para la tarjeta
-            .fillMaxWidth()  // La tarjeta ocupa todo el ancho
-            .padding(5.dp)  // Padding alrededor de la tarjeta
+            .background(Color.Blue)
+            .fillMaxWidth()
+            .padding(5.dp)
     ) {
-        // Título dentro de la tarjeta
         Text(
             text = "This is a title",
-            fontSize = 24.sp,  // Tamaño de fuente grande
-            fontWeight = FontWeight.Bold,  // Negrita
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
             modifier = Modifier
-                .padding(10.dp)  // Padding dentro del texto
+                .padding(10.dp)
         )
 
-        // Imagen dentro de la tarjeta
+        //imagen en la tarjeta
         Image(
             modifier = Modifier
-                .fillMaxWidth()  // Imagen ocupa todo el ancho
-                .height(200.dp),  // Imagen con altura de 200dp
-            painter = painterResource(R.drawable.satosugu),  // Reemplaza con tu recurso de imagen
-            contentDescription = "Audi TTS",  // Descripción de la imagen
-            contentScale = ContentScale.Crop  // Escala la imagen recortándola
+                .fillMaxWidth()
+                .height(200.dp),
+            painter = painterResource(R.drawable.satosugu),
+            contentDescription = "SatoSugu",
+            contentScale = ContentScale.Crop
         )
-
-        // Texto dentro de la tarjeta
         Text(
-            text = stringResource(R.string.Texto),  // Texto que se obtiene de los recursos de cadena
-            textAlign = TextAlign.Justify,  // Alineación del texto justificada
-            lineHeight = 10.sp,  // Altura de las líneas
-            modifier = Modifier.padding(10.dp)  // Padding dentro del texto
+            text = stringResource(R.string.Texto),
+            textAlign = TextAlign.Justify,
+            lineHeight = 10.sp,
+            modifier = Modifier.padding(10.dp)
         )
     }
 }
 
-// Función composable para el contenido de la tarjeta 2 (Content2)
 @Preview(showBackground = true)
 @Composable
 fun Content2() {
     Card(
         modifier = Modifier
-            .background(Color.Blue)  // Fondo azul para la tarjeta
-            .fillMaxWidth()  // La tarjeta ocupa todo el ancho
-            .padding(5.dp)  // Padding alrededor de la tarjeta
+            .background(Color.Red)
+            .fillMaxWidth()
+            .padding(5.dp)
     ) {
-        // Contenedor para la imagen con un Row (fila)
         Row() {
             Image(
                 modifier = Modifier
-                    .fillMaxWidth()  // Imagen ocupa todo el ancho
-                    .width(80.dp)  // Imagen con ancho de 80dp
-                    .height(100.dp),  // Imagen con altura de 100dp
-                painter = painterResource(R.drawable.satosugu),  // Reemplaza con tu recurso de imagen
-                contentDescription = "Geto",  // Descripción de la imagen
-                contentScale = ContentScale.Inside  // Escala la imagen dentro de los límites
+                    .fillMaxWidth()
+                    .width(80.dp)
+                    .height(100.dp),
+                painter = painterResource(R.drawable.satosugu),
+                contentDescription = "Imagen Satosugu",
+                contentScale = ContentScale.Inside
             )
         }
-
-        // Contenedor de texto con un Column (columna)
         Column() {
-            // Título dentro de la tarjeta
             Text(
                 text = "This is a title",
-                fontSize = 12.sp,  // Tamaño de fuente más pequeño
-                fontWeight = FontWeight.Bold,  // Negrita
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier
-                    .padding(5.dp)  // Padding alrededor del texto
+                    .padding(5.dp)
             )
 
-            // Texto adicional dentro de la tarjeta
             Text(
-                text = stringResource(R.string.Texto),  // Texto obtenido de los recursos de cadena
-                textAlign = TextAlign.Left,  // Alineación a la izquierda
-                lineHeight = 14.sp,  // Altura de las líneas
-                fontSize = 10.sp,  // Tamaño de fuente más pequeño
-                modifier = Modifier.padding(10.dp)  // Padding dentro del texto
+                text = stringResource(R.string.Texto),
+                textAlign = TextAlign.Left,
+                lineHeight = 14.sp,
+                fontSize = 10.sp,
+                modifier = Modifier.padding(10.dp)
             )
         }
     }
 }
 
-// Función composable que crea la barra superior (top bar) con un icono y un texto
 @Preview
 @Composable
 fun topbar() {
     Row(
         modifier = Modifier
-            .fillMaxWidth()  // La barra superior ocupa todo el ancho
-            .height(60.dp)  // La barra tiene una altura de 60dp
-            .background(Color.Black)  // Fondo negro para la barra
-            .padding(10.dp)  // Padding dentro de la barra
+            .fillMaxWidth()
+            .height(60.dp)
+            .background(Color.Black)
+            .padding(10.dp)
     ) {
-        // Icono de menú dentro de la barra superior
         Icon(
-            Icons.Filled.Menu,  // Icono de menú
-            contentDescription = "Menu Icon",  // Descripción del icono
-            tint = Color.Red,  // Color del icono (rojo)
+            Icons.Filled.Menu,
+            contentDescription = "Menu Icon",
+            tint = Color.Green,
             modifier = Modifier
-                .size(50.dp)  // Tamaño del icono (50dp)
+                .size(50.dp)
         )
 
-        // Título de la aplicación en la barra superior
+        //barra superior
         Text(
-            stringResource(R.string.app_name),  // Nombre de la aplicación obtenido de los recursos
-            color = Color.White,  // Color blanco para el texto
-            fontSize = 20.sp,  // Tamaño de fuente de 20sp
-            textAlign = TextAlign.Center  // Alineación centrada del texto
+            stringResource(R.string.app_name),
+            color = Color.White,
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center
         )
     }
 }

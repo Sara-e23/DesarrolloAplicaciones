@@ -14,31 +14,28 @@ import com.example.proyecto1.ui.Screens.TestScreen
 import com.example.proyecto1.ui.theme.Proyecto1Theme
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {  // Método que se ejecuta al crear la actividad
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {  // Establece el contenido de la actividad usando Jetpack Compose
-            Proyecto1Theme {  // Aplica el tema de la aplicación
-                ComposableMultiScreenApp()  // Llama a la función principal de navegación
+        setContent {
+            Proyecto1Theme {
+                ComposableMultiScreenApp()
             }
         }
     }
 }
 
-// Función composable que maneja la navegación entre pantallas
 @Composable
 fun ComposableMultiScreenApp() {
-    val navController = rememberNavController()  // Crea un controlador de navegación y lo recuerda
-    SetupNavGraph(navController = navController)  // Configura la navegación con el controlador
+    val navController = rememberNavController()
+    SetupNavGraph(navController = navController)
 }
 
-// Configuración del sistema de navegación de la app
 @Composable
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "Main_Menu") {
-        // Define la estructura de navegación de la app con una pantalla de inicio
 
-        composable("Main_Menu") { MainMenuScreens(navController) }  // Ruta para la pantalla del menú principal
-        composable("Home_Screens") { HomeScreens(navController) }  // Ruta para la pantalla de inicio
-        composable("Test_Screen") { TestScreen(navController) }  // Ruta para la pantalla de prueba
+        composable("Main_Menu") { MainMenuScreens(navController) }
+        composable("Home_Screens") { HomeScreens(navController) }
+        composable("Text_Screen") { TestScreen(navController) }
     }
 }
