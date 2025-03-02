@@ -15,7 +15,7 @@ fun MainMenuScreens(navController: NavHostController) {
     Column(
         modifier = Modifier
             .padding(10.dp)
-            .fillMaxSize()
+            .fillMaxSize()//prueba
     ) {
         Text("Home Screens")
         Button(
