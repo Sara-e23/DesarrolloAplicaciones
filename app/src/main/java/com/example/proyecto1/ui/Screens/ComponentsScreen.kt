@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
@@ -52,7 +56,6 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderPositions
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -61,6 +64,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -82,6 +86,7 @@ import com.example.proyecto1.R
 import com.example.proyecto1.Data.Model.MenuModel
 import com.example.proyecto1.ui.Components.PostCardComponent
 import androidx.compose.ui.res.painterResource
+import com.example.proyecto1.ui.Components.PostCardCompactComponent
 import kotlinx.coroutines.launch
 import java.lang.StackWalker.Option
 
@@ -481,12 +486,20 @@ fun Bars(){
                 }
             }//actions
         )
+        /*
         val arrayPosts = arrayOf(
             MenuModel(1, "Title 1", "Text 1", ImageVector.vectorResource(R.drawable.satosugu)),
             MenuModel(2, "Title 2", "Text 2", ImageVector.vectorResource(R.drawable.satosugu)),
-            MenuModel(3, "Title 3", "Text 3", ImageVector.vectorResource(R.drawable.satosugu))
+            MenuModel(3, "Title 3", "Text 3", ImageVector.vectorResource(R.drawable.satosugu)),
+            MenuModel(4, "Title 4", "Text 4", ImageVector.vectorResource(R.drawable.satosugu)),
+            MenuModel(5, "Title 5", "Text 5", ImageVector.vectorResource(R.drawable.satosugu)),
+            MenuModel(6, "Title 6", "Text 6", ImageVector.vectorResource(R.drawable.satosugu)),
+            MenuModel(7, "Title 7", "Text 7", ImageVector.vectorResource(R.drawable.satosugu)),
+            MenuModel(8, "Title 8", "Text 8", ImageVector.vectorResource(R.drawable.satosugu)),
+            MenuModel(9, "Title 9", "Text 9", ImageVector.vectorResource(R.drawable.satosugu)),
         )
-        LazyColumn(
+        LazyVerticalGrid (//LazyHorizontalGrid y en vez de columns son rows
+            columns = GridCells.Adaptive(minSize = 100.dp),
             modifier = Modifier
                 .fillMaxSize()
                 .weight(1f)
@@ -494,7 +507,16 @@ fun Bars(){
             items(arrayPosts){
                 item -> PostCardComponent(item.id, item.title, item.text, item.image)
             }
+        }*/
+
+        Column (//lo que necesitamos para saber que tipo de dispositivo
+            modifier = Modifier
+                .weight(1F)
+                .fillMaxSize()
+        ){
+            Adaptive()
         }
+
         BottomAppBar(
             containerColor = Color.LightGray,
             contentColor = Color.Red,
@@ -535,5 +557,26 @@ fun Bars(){
                 Icon(imageVector = Icons.Filled.Home, contentDescription = "")
             }
         }
+    }
+}
+
+@Composable
+fun Adaptive(){
+    var windowSize = currentWindowAdaptiveInfo().windowSizeClass
+    var height = currentWindowAdaptiveInfo().windowSizeClass.windowHeightSizeClass
+    var width = currentWindowAdaptiveInfo().windowSizeClass.windowWidthSizeClass
+    // Compact Width < 600 dp Phone Portrait
+    // Medium Width >= 600 dp  < 840 dp Tablet Portrait
+    // Expanded Width >= 840 dp Tablet LandScape
+
+    // Compact Height < 480 dp Phone LandScape
+    // Medium Height >= 480 dp < 900 dp Tablet LandScape/Phone Portrait
+    // Expanded Height >= 900 dp Tablet Portrait
+
+    Column {
+        Text(windowSize.toString())
+        Text(height.toString())
+        Text(width.toString())
+
     }
 }
