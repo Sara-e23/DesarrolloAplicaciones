@@ -51,6 +51,7 @@ import androidx.compose.material3.InputChip
 import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -86,6 +87,8 @@ import com.example.proyecto1.R
 import com.example.proyecto1.Data.Model.MenuModel
 import com.example.proyecto1.ui.Components.PostCardComponent
 import androidx.compose.ui.res.painterResource
+import androidx.window.core.layout.WindowHeightSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 import com.example.proyecto1.ui.Components.PostCardCompactComponent
 import kotlinx.coroutines.launch
 import java.lang.StackWalker.Option
@@ -473,8 +476,8 @@ fun Bars(){
     ){
         TopAppBar(
             colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = Color.Blue,
-                titleContentColor = Color.Gray
+                containerColor = MaterialTheme.colorScheme.primary,
+                titleContentColor = MaterialTheme.colorScheme.secondary
             ),
             title = { Text("Screen title") },
             actions = {
@@ -486,7 +489,7 @@ fun Bars(){
                 }
             }//actions
         )
-        /*
+        ///*
         val arrayPosts = arrayOf(
             MenuModel(1, "Title 1", "Text 1", ImageVector.vectorResource(R.drawable.satosugu)),
             MenuModel(2, "Title 2", "Text 2", ImageVector.vectorResource(R.drawable.satosugu)),
@@ -507,7 +510,7 @@ fun Bars(){
             items(arrayPosts){
                 item -> PostCardComponent(item.id, item.title, item.text, item.image)
             }
-        }*/
+        }//*/
 
         Column (//lo que necesitamos para saber que tipo de dispositivo
             modifier = Modifier
@@ -518,8 +521,8 @@ fun Bars(){
         }
 
         BottomAppBar(
-            containerColor = Color.LightGray,
-            contentColor = Color.Red,
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.secondary
         ){
             IconButton(
                 modifier = Modifier
@@ -573,10 +576,36 @@ fun Adaptive(){
     // Medium Height >= 480 dp < 900 dp Tablet LandScape/Phone Portrait
     // Expanded Height >= 900 dp Tablet Portrait
 
-    Column {
-        Text(windowSize.toString())
-        Text(height.toString())
-        Text(width.toString())
-
-    }
+    val menuOption = arrayOf(
+        MenuModel(1, "Buttons", "button", Icons.Filled.Home),
+        MenuModel(2, "Floating Buttons", "FButtons", Icons.Filled.Home),
+        MenuModel(3, "Progress", "prog", Icons.Filled.Home),
+        MenuModel(4, "Chips", "chip", Icons.Filled.Home),
+        MenuModel(5, "Sliders", "slider", Icons.Filled.Home),
+        MenuModel(6, "Switches", "switch", Icons.Filled.Home),
+        MenuModel(7, "Badges", "badges", Icons.Filled.Home),
+        MenuModel(8, "Snack Bars", "SBar", Icons.Filled.Home),
+        MenuModel(9, "Alerts Dialogs", "AD", Icons.Filled.Home),
+        MenuModel(10, "Top App Bar", "tap", Icons.Filled.Home)
+    )
+    /*
+    if (width == WindowWidthSizeClass.COMPACT){
+        LazyColumn (//LazyHorizontalGrid y en vez de columns son rows
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            items(arrayPosts){
+                    item -> PostCardComponent(item.id, item.title, item.text, item.image)
+            }
+        }
+    } else if(height == WindowHeightSizeClass.COMPACT){
+        LazyColumn (//LazyHorizontalGrid y en vez de columns son rows
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            items(arrayPosts){
+                    item -> PostCardCompactComponent(item.id, item.title, item.text, item.image)
+            }
+        }
+    }*/
 }
