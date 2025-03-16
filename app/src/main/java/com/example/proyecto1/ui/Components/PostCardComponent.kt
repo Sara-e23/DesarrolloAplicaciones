@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.example.proyecto1.R
 
 @Composable
-fun PostCardComponent(id:Int, title:String, text:String, image:ImageVector){
+fun PostCardComponent(id:Int, title:String, text:String, image:Int){
     Card(
         modifier = Modifier
             .background(Color.Black)
@@ -43,7 +43,7 @@ fun PostCardComponent(id:Int, title:String, text:String, image:ImageVector){
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp),
-            painter = painterResource(R.drawable.satosugu),
+            painter = painterResource(image),
             contentDescription = "una desc xd",
             contentScale = ContentScale.Crop
         )
@@ -58,7 +58,7 @@ fun PostCardComponent(id:Int, title:String, text:String, image:ImageVector){
 }
 
 @Composable
-fun PostCardCompactComponent(id:Int, title:String, text:String, image:ImageVector) {
+fun PostCardCompactComponent(id:Int, title:String, text:String, image:Int) {
     Card(
         modifier = Modifier
             .background(Color.Red)
