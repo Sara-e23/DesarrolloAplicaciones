@@ -3,12 +3,16 @@ package com.example.proyecto1.ui.Screens
 import android.app.DatePickerDialog
 import android.content.Context
 import android.graphics.drawable.Icon
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -28,6 +32,7 @@ import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DrawerValue
@@ -67,6 +72,7 @@ import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -77,6 +83,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
@@ -113,7 +120,7 @@ fun ComponentsScreen(navController: NavHostController){
         MenuModel(10, "Top App Bar", "tap", Icons.Filled.Home),
         MenuModel(11, "Input Fields", "inputF", Icons.Filled.Edit),
         MenuModel(12, "Date Picker", "dateP", Icons.Filled.DateRange),
-        //MenuModel(13, "Pull To refresh", "pull", Icons.Filled.Refresh),
+        MenuModel(13, "Pull To refresh", "pull", Icons.Filled.Refresh),
         MenuModel(14, "Bottom Sheets", "bottomSh", Icons.Filled.KeyboardArrowDown),
         MenuModel(15, "Segmented Buttons", "segmentedB", Icons.Filled.CheckCircle)
     )
@@ -158,10 +165,10 @@ fun ComponentsScreen(navController: NavHostController){
             "SBar" -> { SnackBars() }
             "AD" -> { AlertDialogs() }
             "tap" -> { Bars() }
-            //homeWork
+            //homework
             "inputF" -> { InputField() }
             "dateP" -> { DatePick(context = LocalContext.current) }
-            //"pull" -> { PullToRefresh() }
+            "pull" -> { PullToRefresh() }
             "bottomSh" -> { BottomSheet() }
             "segmentedB" -> { SegmentedButtons() }
         }
@@ -219,6 +226,7 @@ fun FloatingButtons(){
         }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun Progress() {
@@ -622,6 +630,7 @@ fun Adaptive() {
         }
     }
 }
+
 //HOMEWORK
 @Composable
 fun InputField(){//campo de entrada
@@ -675,32 +684,49 @@ fun DatePick(context: Context){//selector de fecha
 
 }
 
-/*
 @Composable
-fun PullToRefresh() {//Deslizador para actualizar
-    val refreshing = remember { mutableStateOf(false) }
-    val refreshScope = rememberCoroutineScope()
+fun PullToRefresh() {
+    var isRefreshing by remember { mutableStateOf(false) }
 
-    fun refresh() {
-        refreshScope.launch {
-            refreshing.value = true
-            delay(2000) //Simula carga de datos
-            refreshing.value = false
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .pointerInput(Unit) {
+                detectVerticalDragGestures { _, dragAmount ->
+                    if (dragAmount > 20) { //arrastar abajo
+                        isRefreshing = true
+                        isRefreshing = false
+                    }
+                }
+            },
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top
+    ) {
+        if (isRefreshing) {
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .size(50.dp)
+            )
         }
-    }
-
-    val state = rememberPullToRefreshState(refreshing.value, ::refresh)
-
-    Box(modifier = Modifier.fillMaxSize().pullRefresh(state)) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        Spacer(
+            modifier = Modifier
+                .height(10.dp)
+        )
+        //contenido
+        LazyColumn {
             items(20) { index ->
-                Text(text = "Item $index", modifier = Modifier.padding(16.dp))
+                Text(
+                    text = "Item $index",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                        .background(Color.LightGray)
+                )
             }
         }
-        //PullRefreshIndicator(refreshing.value, state, Modifier.align(Alignment.TopCenter))
     }
 }
-*/
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -709,22 +735,28 @@ fun BottomSheet() {//paneles deslizables inferiores
     val scope = rememberCoroutineScope()
     var showSheet by remember { mutableStateOf(false) }
 
-    if (showSheet) {
-        ModalBottomSheet(
-            onDismissRequest = { showSheet = false },
-            sheetState = sheetState
-        ) {
-            Text("This is a Bottom Sheet", modifier = Modifier.padding(16.dp))
-            Button(
-                onClick = { showSheet = false },
-                modifier = Modifier.padding(16.dp)
+    Column(modifier = Modifier
+            .fillMaxSize(),//toda la pantalla
+        horizontalAlignment = Alignment.CenterHorizontally,//centra h
+        verticalArrangement = Arrangement.Center//centra v
+    ) {
+        if (showSheet) {
+            ModalBottomSheet(
+                onDismissRequest = { showSheet = false },
+                sheetState = sheetState
             ) {
-                Text("Close")
+                Text("This is a Bottom Sheet", modifier = Modifier.padding(16.dp))
+                Button(
+                    onClick = { showSheet = false },
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Text("Close")
+                }
             }
         }
-    }
-    Button(onClick = { showSheet = true }) {
-        Text("Show Bottom Sheet")
+        Button(onClick = { showSheet = true }) {
+            Text("Show Bottom Sheet")
+        }
     }
 }
 
@@ -732,19 +764,28 @@ fun BottomSheet() {//paneles deslizables inferiores
 fun SegmentedButtons() {//agrupa opciones en botones organizados
     var selected by remember { mutableStateOf("Option 1") }
 
-    Row(modifier = Modifier.padding(16.dp)) {
-        listOf("Option 1", "Option 2", "Option 3").forEach { option ->
-            Button(
-                onClick = { selected = option },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if (selected == option) Color.Blue else Color.Gray
-                ),
-                modifier = Modifier.padding(4.dp)
-            ) {
-                Text(option)
+    Column (modifier = Modifier
+            .fillMaxSize(),//toda la pantalla
+        horizontalAlignment = Alignment.CenterHorizontally,//centra h
+        verticalArrangement = Arrangement.Center//centra v
+    ){
+        Row(modifier = Modifier.padding(16.dp)) {
+            listOf("Option 1", "Option 2", "Option 3").forEach { option ->
+                Button(
+                    onClick = { selected = option },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (selected == option)
+                            MaterialTheme.colorScheme.primary
+                        else MaterialTheme.colorScheme.secondary
+                    ),
+                    modifier = Modifier.padding(4.dp)
+                ) {
+                    Text(option)
+                }
             }
         }
+        Text(text = "Selected: $selected", modifier = Modifier.padding(top = 8.dp))
     }
-    Text(text = "Selected: $selected", modifier = Modifier.padding(top = 8.dp))
+
 }
 
