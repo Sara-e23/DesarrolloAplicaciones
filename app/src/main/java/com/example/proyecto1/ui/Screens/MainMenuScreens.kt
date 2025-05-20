@@ -35,5 +35,10 @@ fun MainMenuScreens(navController: NavHostController) {
         ) {
             Text("Go to Components Screen")
         }
+        Button(
+            onClick = { navController.navigate("Calendario_screen") }
+        ) {
+            Text("Go to Calendario Screen")
+        }
     }
 }
