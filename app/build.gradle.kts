@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -40,24 +41,57 @@ android {
 }
 
 dependencies {
-    //implementation(androidx.swiperefreshlayout:swiperefreshlayout:1.1.0)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.navigation.runtime.ktx)
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.adaptive.android)
-    //implementation(libs.androidx.material3.adaptive.android)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    dependencies {
+        implementation(libs.androidx.material)
+        implementation(libs.androidx.material.icons.extended)
+        implementation(libs.material3)
+        implementation(libs.androidx.material3.window.size.class1)
+        implementation(libs.androidx.foundation)
+        implementation(libs.androidx.foundation.layout)
+        implementation(libs.androidx.foundation.layout.android)
+        implementation(libs.androidx.runtime)
+        implementation(libs.androidx.core.ktx)
+        implementation(libs.androidx.lifecycle.runtime.ktx)
+        implementation(libs.androidx.lifecycle.runtime.ktx.v262)
+        implementation(libs.androidx.activity.compose)
+        implementation(platform(libs.androidx.compose.bom))
+        implementation(libs.androidx.ui)
+        implementation(libs.androidx.ui.graphics)
+        implementation(libs.androidx.ui.tooling.preview)
+        implementation(libs.androidx.navigation.compose)
+        implementation(libs.androidx.navigation.runtime.ktx)
+        implementation(libs.androidx.navigation.runtime.android)
+        implementation(libs.androidx.adaptive.android)
+
+        //room
+        val room_version = "2.6.1"
+        implementation("androidx.room:room-runtime:$room_version")
+        implementation("androidx.room:room-ktx:$room_version")
+        ksp("androidx.room:room-compiler:$room_version")
+        //coil (img)
+        implementation(libs.coil.compose)
+
+
+        //Retrofit + OkHttp + JSON
+        implementation(libs.retrofit2.kotlinx.serialization.converter)
+        implementation(libs.retrofit)
+        implementation(libs.okhttp)
+        implementation(libs.kotlinx.serialization.json)
+        implementation(libs.converter.gson)
+        //biometric
+        implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
+        // Test
+        testImplementation(libs.junit)
+        androidTestImplementation(libs.androidx.junit)
+        androidTestImplementation(libs.androidx.espresso.core)
+        androidTestImplementation(platform(libs.androidx.compose.bom))
+        androidTestImplementation(libs.androidx.ui.test.junit4)
+        // Debug
+        debugImplementation(libs.androidx.ui.tooling)
+        debugImplementation(libs.androidx.ui.test.manifest)
+    }
+}
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
 }

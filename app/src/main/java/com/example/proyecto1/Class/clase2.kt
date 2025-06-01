@@ -1,4 +1,4 @@
-package com.example.proyecto1
+package com.example.proyecto1.Class
 
 //class clase2 {
 //}

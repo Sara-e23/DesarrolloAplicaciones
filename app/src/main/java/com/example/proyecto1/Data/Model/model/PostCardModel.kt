@@ -1,4 +1,4 @@
-package com.example.proyecto1.Data.Model
+package com.example.proyecto1.Data.Model.model
 
 data class PostCardModel(
     val id: Int,
