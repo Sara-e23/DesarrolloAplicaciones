@@ -14,6 +14,7 @@ import androidx.navigation.navArgument
 import com.example.proyecto1.Data.Model.database.AppDatabase
 import com.example.proyecto1.Data.Model.database.DatabaseProvider
 import com.example.proyecto1.ui.Screens.AccountsScreen
+import com.example.proyecto1.ui.Screens.Calendar
 import com.example.proyecto1.ui.Screens.ComponentsScreen
 import com.example.proyecto1.ui.Screens.FavoriteAccountsScreen
 import com.example.proyecto1.ui.Screens.HomeScreens
@@ -69,5 +70,6 @@ fun SetupNavGraph(navController: NavHostController) {
             )
         }
         composable("ManageAccount_screen") { FavoriteAccountsScreen(navController) }
+        composable("Calendar_screen") { Calendar(navController) }
     }
 }
