@@ -41,7 +41,6 @@ android {
 }
 
 dependencies {
-    dependencies {
         implementation(libs.androidx.material)
         implementation(libs.androidx.material.icons.extended)
         implementation(libs.material3)
@@ -90,7 +89,7 @@ dependencies {
         // Debug
         debugImplementation(libs.androidx.ui.tooling)
         debugImplementation(libs.androidx.ui.test.manifest)
-    }
+
 }
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
